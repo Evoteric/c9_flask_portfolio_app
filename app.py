@@ -10,15 +10,16 @@ app = Flask(__name__)
 
 
 @app.route('/', methods=['GET'])
+# the '/' above is in reference to the root address of a website (nothing after '.com/')
 def home_page():
-	return render_template('index.html')
+	return render_template('index.html') # show the user the .html file when on home page
 
-@app.route('/<name>')
+@app.route('/<name>') # what happens when someone types in '/<name>' after the root url
 def profile(name):
-	return render_template('index.html', name=name)
+	return render_template('index.html', name=name) # render the same index.html file, except this time add name
 
 
-@app.route('/add_numbers', methods=['GET','POST'])
+@app.route('/add_numbers', methods=['GET','POST']) # what happens when someone types '/add_numbers' after the root url 
 def add_numbers_post():
 	  # --> ['5', '6', '8']
 	  # print(type(request.form['text']))
@@ -28,8 +29,8 @@ def add_numbers_post():
   	      print(request.form['text'].split())
   	      total = 0
   	      try:
-  	      	for str_num in request.form['text'].split():
-  	      		total += int(str_num)
+  	      	for str_num in request.form['text'].split(): # split the strings given (in order to prep to convert to int)
+  	      		total += int(str_num) # sum the numbers and change them to integers
   	      	return render_template('add_numbers.html', result=str(total))
   	      except ValueError:
   	      	return "Easy now! Let's keep it simple! 2 numbers with a space between them please"
